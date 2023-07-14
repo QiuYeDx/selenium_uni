@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.selenium_uni.dao.LogEntityMapper">
+
+    <sql id="Base_Column_List">
+        logid,time,id,type,state,exception
+    </sql>
+
+    <update id="createTable" parameterType="java.lang.String">
+        CREATE TABLE `instruction_log` (
+                `logid` int NOT NULL AUTO_INCREMENT,
+                `time` timestamp NULL DEFAULT NULL,
+                `id` varchar(255) DEFAULT NULL,
+                `type` varchar(255) DEFAULT NULL,
+                `state` varchar(255) DEFAULT NULL,
+                `exception` varchar(2550) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+                PRIMARY KEY (`logid`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+    </update>
+
+
+    <insert id="insert_log" parameterType="com.example.selenium_uni.dao.Entity.LogEntity">
+        insert into instruction_log (time,id,type,state,exception)
+        values (#{time,jdbcType=TIMESTAMP}, #{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},#{state,jdbcType=VARCHAR},#{exception,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="queryLogList" parameterType="java.lang.String" resultType="com.example.selenium_uni.dao.Entity.LogEntity">
+        SELECT
+            *
+        FROM instruction_log
+    </select>
+
+    <update id="dropTable" parameterType="java.lang.String">
+        drop table if exists instruction_log
+    </update>
+
+</mapper>

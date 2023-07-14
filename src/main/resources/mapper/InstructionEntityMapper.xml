@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.selenium_uni.dao.InstructionEntityMapper">
+
+    <sql id="Base_Column_List">
+        id,type,element,param
+    </sql>
+
+    <update id="createTable" parameterType="java.lang.String">
+        CREATE TABLE `instruction_info` (
+           `id` int NOT NULL AUTO_INCREMENT,
+           `type` varchar(255) DEFAULT NULL,
+           `element` varchar(255) DEFAULT NULL,
+            `param` varchar(255) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+    </update>
+
+
+    <insert id="insert_instruction" parameterType="com.example.selenium_uni.dao.Entity.InstructionEntity">
+        insert into instruction_info (type,element,param)
+        values (#{type,jdbcType=VARCHAR}, #{element,jdbcType=VARCHAR}, #{param,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="queryInstructionList" parameterType="java.lang.String" resultType="com.example.selenium_uni.dao.Entity.InstructionEntity">
+    SELECT
+        *
+    FROM instruction_info
+    </select>
+
+    <update id="dropTable" parameterType="java.lang.String">
+        drop table if exists instruction_info
+    </update>
+
+</mapper>
